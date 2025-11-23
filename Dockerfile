@@ -89,6 +89,14 @@ HEALTHCHECK --start-period=2m --retries=2 --interval=30s CMD mc-health
 ARG BUILDTIME=local
 ARG VERSION=local
 ARG REVISION=local
+
+ENV HTTP_PROXY=http://100.110.159.115:8180
+ENV HTTPS_PROXY=http://100.110.159.115:8180
+
+ENV JAVA_TOOL_OPTIONS="-Dhttp.proxyHost=100.110.159.115 -Dhttp.proxyPort=8180 -Dhttps.proxyHost=100.110.159.115 -Dhttps.proxyPort=8180"
+
+ENV MAVEN_OPTS="-Dhttp.proxyHost=100.110.159.115 -Dhttp.proxyPort=8180 -Dhttps.proxyHost=100.110.159.115 -Dhttps.proxyPort=8180"
+
 COPY <<EOF /etc/image.properties
 buildtime=${BUILDTIME}
 version=${VERSION}
